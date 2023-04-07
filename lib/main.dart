@@ -1,3 +1,4 @@
+import 'package:building_layout_training/pages/layout_page.dart';
 import 'package:building_layout_training/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // canvasColor: const Color.fromRGBO(255, 255, 255, 0.9),
       ),
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        // '/':(context) => LayoutPage(),
-        '/': (context) => LoginPage(),
+        '/login': (context) => LoginPage(),
+        '/': (context) => LayoutPage(),
       },
     );
   }
