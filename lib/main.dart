@@ -1,5 +1,6 @@
 import 'package:building_layout_training/pages/layout_page.dart';
 import 'package:building_layout_training/pages/login_page.dart';
+import 'package:building_layout_training/pages/shopping_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // canvasColor: const Color.fromRGBO(255, 255, 255, 0.9),
       ),
-      initialRoute: '/login',
+      initialRoute: ShoppingPage.routeName,
       routes: {
-        '/login': (context) => LoginPage(),
         '/': (context) => LayoutPage(),
+        '/login': (context) => LoginPage(),
+        ShoppingPage.routeName:(context) => ShoppingPage(),
       },
     );
   }
