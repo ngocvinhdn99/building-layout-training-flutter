@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../providers/counter.dart';
-import '../widges/action.dart';
+import '../widgets/action.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LayoutPage extends ConsumerWidget {
