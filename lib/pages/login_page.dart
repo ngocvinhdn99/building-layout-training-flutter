@@ -1,34 +1,21 @@
+import 'package:building_layout_training/providers/form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginPage extends StatefulWidget {
-  bool isHidePassword = true;
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  // const LoginPage({super.key});
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  void toggleShowPassword() {
-    setState(() {
-      widget.isHidePassword = !widget.isHidePassword;
-    });
-  }
-
-  void onSubmit() {
-    final emailText = emailController.text;
-    final inputText = passwordController.text;
-
-    print(emailText);
-    print(inputText);
-  }
+class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final form = ref.read(formProvider);
+    print('outside');
+    print(form.formValues);
+
+    void onSubmit() {
+      print('inside');
+      print(form.formValues);
+    }
+
     Widget sectionHeader = Column(children: const [
       Text(
         'Login',
@@ -65,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w500),
             )),
         TextField(
-          controller: emailController,
+          onChanged: (value) => form.updateFormValues('email', value),
           decoration: const InputDecoration(
               border: OutlineInputBorder(), contentPadding: EdgeInsets.all(10)),
         ),
@@ -83,23 +70,30 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.black87,
                   fontWeight: FontWeight.w500),
             )),
-        Stack(
-          alignment: AlignmentDirectional.centerEnd,
-          children: [
-            TextField(
-              controller: passwordController,
-              obscureText: widget.isHidePassword,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10)),
-            ),
-            IconButton(
-                onPressed: toggleShowPassword,
-                icon: Icon(widget.isHidePassword
-                    ? Icons.visibility_off
-                    : Icons.visibility))
-          ],
-        ),
+        Consumer(
+          builder: (context, ref, child) {
+            final isHidePassword = ref.watch(formProvider).isHidePassword;
+
+            return Stack(
+              alignment: AlignmentDirectional.centerEnd,
+              children: [
+                TextField(
+                  onChanged: (value) =>
+                      form.updateFormValues('password', value),
+                  obscureText: isHidePassword,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.all(10)),
+                ),
+                IconButton(
+                    onPressed: () => form.toggleShowPassword(),
+                    icon: Icon(isHidePassword
+                        ? Icons.visibility_off
+                        : Icons.visibility))
+              ],
+            );
+          },
+        )
       ],
     );
 

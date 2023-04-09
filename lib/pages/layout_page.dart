@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../providers/counter.dart';
 import '../widges/action.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LayoutPage extends StatelessWidget {
+class LayoutPage extends ConsumerWidget {
   LayoutPage({super.key});
 
   final String imageUrl =
@@ -25,7 +27,20 @@ class LayoutPage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<CountNotifer>(
+      countProvider,
+      (previous, next) {
+        print("The old value is ${previous?.count}");
+        print("The new value is ${next.count}");
+        if (next.count == 5) {
+          print("I just reached 5");
+        }
+      },
+    );
+
+    // print('rebuild');
+
     return Scaffold(
       appBar: AppBar(title: Text('Layout Page')),
       body: Center(
@@ -78,10 +93,32 @@ class LayoutPage extends StatelessWidget {
                         vertical: 20, horizontal: 40),
                     child: ActionContainer(actionList),
                   ),
-                  Text(bodyText)
+                  Text(bodyText),
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            ref.read(countProvider).decreaseCount();
+                          },
+                          icon: Icon(Icons.minimize_outlined)),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          // print('rebuild inside');
+                          return Text(
+                            ref.watch(countProvider).count.toString(),
+                          );
+                        },
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            ref.read(countProvider).plusCount();
+                          },
+                          icon: Icon(Icons.plus_one))
+                    ],
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
