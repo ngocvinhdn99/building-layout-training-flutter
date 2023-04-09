@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class ShoppingPage extends StatefulWidget {
   static const routeName = '/shopping';
+  const ShoppingPage({super.key});
 
   @override
   State<ShoppingPage> createState() => _ShoppingPageState();

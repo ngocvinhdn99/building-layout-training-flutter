@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AllProductScreen extends ConsumerWidget {
-  static const routeName = '/shopping';
-
   const AllProductScreen({super.key});
 
   @override

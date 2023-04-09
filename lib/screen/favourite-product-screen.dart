@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class FavouriteProductScreen extends ConsumerWidget {
-  static const routeName = '/shopping';
-
   const FavouriteProductScreen({super.key});
 
   @override
