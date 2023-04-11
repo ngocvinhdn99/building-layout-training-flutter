@@ -1,19 +1,32 @@
+import 'package:building_layout_training/pages/shopping_page.dart';
 import 'package:building_layout_training/providers/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  LoginPageState createState() => LoginPageState();
+}
+
+class LoginPageState extends ConsumerState<LoginPage> {
+  static const routeName = '/login';
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     final form = ref.read(formProvider);
-    print('outside');
-    print(form.formValues);
 
     void onSubmit() {
-      print('inside');
-      print(form.formValues);
+      final emailText = emailController.text;
+      final passwordText = passwordController.text;
+
+      if (emailText.isEmpty || passwordText.isEmpty) return;
+
+      form.updateAccount(emailText, passwordText);
+      Navigator.of(context).pushNamed(ShoppingPage.routeName);
     }
 
     Widget sectionHeader = Column(children: const [
@@ -52,7 +65,7 @@ class LoginPage extends ConsumerWidget {
                   fontWeight: FontWeight.w500),
             )),
         TextField(
-          onChanged: (value) => form.updateFormValues('email', value),
+          controller: emailController,
           decoration: const InputDecoration(
               border: OutlineInputBorder(), contentPadding: EdgeInsets.all(10)),
         ),
@@ -78,8 +91,7 @@ class LoginPage extends ConsumerWidget {
               alignment: AlignmentDirectional.centerEnd,
               children: [
                 TextField(
-                  onChanged: (value) =>
-                      form.updateFormValues('password', value),
+                  controller: passwordController,
                   obscureText: isHidePassword,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),

@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class FormNotifier extends ChangeNotifier {
-  Map<String, String> formValues = {
-    'email': '',
-    'password': '',
-  };
-  bool isHidePassword = true;
+class Account {
+  final String email;
+  final String password;
 
-  void updateFormValues(key, newValue) {
-    formValues.update(key, (value) => newValue);
-    // notifyListeners();
-  }
+  Account(this.email, this.password);
+}
+
+class FormNotifier extends ChangeNotifier {
+  Account formValues = Account('', '');
+  bool isHidePassword = true;
 
   void toggleShowPassword() {
     isHidePassword = !isHidePassword;
+    notifyListeners();
+  }
+
+  void updateAccount(email, password) {
+    formValues = Account(email, password);
+    notifyListeners();
+  }
+
+  void clearAccount() {
+    formValues = Account('', '');
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:building_layout_training/screen/all-product-screen.dart';
 import 'package:building_layout_training/screen/favourite-product-screen.dart';
+import 'package:building_layout_training/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingPage extends StatefulWidget {
@@ -29,9 +30,12 @@ class _ShoppingPageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(title: Text(_pagesInfo[_selectedIndex]['title'] as String)),
+      appBar: AppBar(
+        title: Text(_pagesInfo[_selectedIndex]['title'] as String),
+        // automaticallyImplyLeading: false,
+      ),
       body: _pagesInfo[_selectedIndex]['page'] as Widget,
+      drawer: const HomeDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         items: _pagesInfo
             .map((e) => BottomNavigationBarItem(

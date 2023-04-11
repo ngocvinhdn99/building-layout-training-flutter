@@ -1,6 +1,7 @@
 import 'package:building_layout_training/pages/layout_page.dart';
 import 'package:building_layout_training/pages/login_page.dart';
 import 'package:building_layout_training/pages/shopping_page.dart';
+import 'package:building_layout_training/providers/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,22 +15,30 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final form = ref.watch(formProvider);
+
+    var isAccount =
+        form.formValues.email.isNotEmpty && form.formValues.password.isNotEmpty;
+
+    print(isAccount);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         // canvasColor: const Color.fromRGBO(255, 255, 255, 0.9),
       ),
-      initialRoute: ShoppingPage.routeName,
+      initialRoute:
+          isAccount ? ShoppingPage.routeName : LoginPageState.routeName,
       routes: {
         '/': (context) => LayoutPage(),
-        '/login': (context) => LoginPage(),
-        ShoppingPage.routeName:(context) => ShoppingPage(),
+        LoginPageState.routeName: (context) => const LoginPage(),
+        ShoppingPage.routeName: (context) => const ShoppingPage(),
       },
     );
   }
