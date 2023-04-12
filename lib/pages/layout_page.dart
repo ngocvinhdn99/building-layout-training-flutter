@@ -4,6 +4,7 @@ import '../widgets/action.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LayoutPage extends ConsumerWidget {
+  static const routeName = '/layout';
   LayoutPage({super.key});
 
   final String imageUrl =

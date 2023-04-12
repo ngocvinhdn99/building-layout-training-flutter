@@ -2,6 +2,8 @@ import 'package:building_layout_training/screen/all-product-screen.dart';
 import 'package:building_layout_training/screen/favourite-product-screen.dart';
 import 'package:building_layout_training/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login_page.dart';
 
 class ShoppingPage extends StatefulWidget {
   static const routeName = '/shopping';
@@ -26,6 +28,22 @@ class _ShoppingPageState extends State<ShoppingPage> {
       'icon': Icons.favorite,
     }
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // "ref" can be used in all life-cycles of a StatefulWidget.
+    loadCheckToken();
+  }
+
+  void loadCheckToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool isHaveToken = prefs.getBool('isHaveToken') ?? false;
+
+    if (!isHaveToken) {
+      Navigator.of(context).pushNamed(LoginPageState.routeName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

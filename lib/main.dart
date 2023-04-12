@@ -1,3 +1,4 @@
+import 'package:building_layout_training/pages/landing_page.dart';
 import 'package:building_layout_training/pages/layout_page.dart';
 import 'package:building_layout_training/pages/login_page.dart';
 import 'package:building_layout_training/pages/shopping_page.dart';
@@ -20,25 +21,18 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final form = ref.watch(formProvider);
-
-    var isAccount =
-        form.formValues.email.isNotEmpty && form.formValues.password.isNotEmpty;
-
-    print(isAccount);
-
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         // canvasColor: const Color.fromRGBO(255, 255, 255, 0.9),
       ),
-      initialRoute:
-          isAccount ? ShoppingPage.routeName : LoginPageState.routeName,
+      initialRoute: ShoppingPage.routeName,
       routes: {
-        '/': (context) => LayoutPage(),
+        // '/': (context) => const LandingPage(),
         LoginPageState.routeName: (context) => const LoginPage(),
         ShoppingPage.routeName: (context) => const ShoppingPage(),
+        LayoutPage.routeName: (context) => LayoutPage(),
       },
     );
   }

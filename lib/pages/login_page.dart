@@ -26,6 +26,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
       if (emailText.isEmpty || passwordText.isEmpty) return;
 
       form.updateAccount(emailText, passwordText);
+      form.updateToken(true);
       Navigator.of(context).pushNamed(ShoppingPage.routeName);
     }
 
