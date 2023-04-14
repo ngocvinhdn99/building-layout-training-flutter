@@ -14,7 +14,7 @@ class HomeDrawerState extends ConsumerState<HomeDrawer> {
   void handleLogout() {
     ref.read(formProvider).clearAccount();
     ref.read(formProvider).updateToken(false);
-    Navigator.of(context).pushNamed(LoginPageState.routeName);
+    // Navigator.of(context).pushNamed(LoginPageState.routeName);
   }
 
   @override

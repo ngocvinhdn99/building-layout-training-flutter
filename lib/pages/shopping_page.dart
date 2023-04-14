@@ -29,21 +29,21 @@ class _ShoppingPageState extends State<ShoppingPage> {
     }
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    // "ref" can be used in all life-cycles of a StatefulWidget.
-    loadCheckToken();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // "ref" can be used in all life-cycles of a StatefulWidget.
+  //   loadCheckToken();
+  // }
 
-  void loadCheckToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isHaveToken = prefs.getBool('isHaveToken') ?? false;
+  // void loadCheckToken() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final bool isHaveToken = prefs.getBool('isHaveToken') ?? false;
 
-    if (!isHaveToken) {
-      Navigator.of(context).pushNamed(LoginPageState.routeName);
-    }
-  }
+  //   if (!isHaveToken) {
+  //     Navigator.of(context).pushNamed(LoginPageState.routeName);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

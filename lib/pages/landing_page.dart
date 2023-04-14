@@ -25,8 +25,8 @@ class LandingPageState extends ConsumerState<LandingPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool isHaveToken = prefs.getBool('isHaveToken') ?? false;
 
-    if (!isHaveToken) {
-      Navigator.of(context).pushNamed(LoginPageState.routeName);
+    if (isHaveToken) {
+      ref.read(formProvider).updateToken(isHaveToken);
     }
   }
 
@@ -34,17 +34,19 @@ class LandingPageState extends ConsumerState<LandingPage> {
   Widget build(BuildContext context) {
     final isHasToken = ref.watch(formProvider).isHaveToken;
 
-    // if (isHasToken) {
-    //   print('shopping page');
+    if (isHasToken) {
+      print('shopping page');
 
-    //   Future.microtask(
-    //       () => Navigator.of(context).pushNamed(ShoppingPage.routeName));
-    // } else {
-    //   print('login page');
-    //   Future.microtask(
-    //       () => Navigator.of(context).pushNamed(LoginPageState.routeName));
-    // }
+      Future.microtask(
+          () => Navigator.of(context).pushNamed(ShoppingPage.routeName));
+    } else {
+      print('login page');
+      Future.microtask(
+          () => Navigator.of(context).pushNamed(LoginPageState.routeName));
+    }
 
-    return Text('landing page');
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
   }
 }

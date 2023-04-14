@@ -27,7 +27,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
 
       form.updateAccount(emailText, passwordText);
       form.updateToken(true);
-      Navigator.of(context).pushNamed(ShoppingPage.routeName);
+      // Navigator.of(context).pushNamed(ShoppingPage.routeName);
     }
 
     Widget sectionHeader = Column(children: const [

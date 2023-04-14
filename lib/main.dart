@@ -27,9 +27,9 @@ class MyApp extends ConsumerWidget {
         primarySwatch: Colors.blue,
         // canvasColor: const Color.fromRGBO(255, 255, 255, 0.9),
       ),
-      initialRoute: ShoppingPage.routeName,
+      // initialRoute: ShoppingPage.routeName,
       routes: {
-        // '/': (context) => const LandingPage(),
+        '/': (context) => const LandingPage(),
         LoginPageState.routeName: (context) => const LoginPage(),
         ShoppingPage.routeName: (context) => const ShoppingPage(),
         LayoutPage.routeName: (context) => LayoutPage(),
