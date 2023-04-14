@@ -1,4 +1,5 @@
 import 'package:building_layout_training/pages/shopping_page.dart';
+import 'package:building_layout_training/providers/auth.dart';
 import 'package:building_layout_training/providers/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +19,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final form = ref.read(formProvider);
+    final auth = ref.read(authProvider);
 
     void onSubmit() {
       final emailText = emailController.text;
@@ -26,8 +28,8 @@ class LoginPageState extends ConsumerState<LoginPage> {
       if (emailText.isEmpty || passwordText.isEmpty) return;
 
       form.updateAccount(emailText, passwordText);
-      form.updateToken(true);
-      // Navigator.of(context).pushNamed(ShoppingPage.routeName);
+      auth.updateToken(true);
+      Navigator.of(context).pushNamed(ShoppingPage.routeName);
     }
 
     Widget sectionHeader = Column(children: const [

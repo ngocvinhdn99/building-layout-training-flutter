@@ -1,4 +1,5 @@
 import 'package:building_layout_training/pages/shopping_page.dart';
+import 'package:building_layout_training/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,13 +27,13 @@ class LandingPageState extends ConsumerState<LandingPage> {
     final bool isHaveToken = prefs.getBool('isHaveToken') ?? false;
 
     if (isHaveToken) {
-      ref.read(formProvider).updateToken(isHaveToken);
+      ref.read(authProvider).updateToken(isHaveToken);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isHasToken = ref.watch(formProvider).isHaveToken;
+    final isHasToken = ref.watch(authProvider).isHaveToken;
 
     if (isHasToken) {
       print('shopping page');

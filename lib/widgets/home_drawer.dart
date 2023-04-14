@@ -1,4 +1,5 @@
 import 'package:building_layout_training/pages/login_page.dart';
+import 'package:building_layout_training/providers/auth.dart';
 import 'package:building_layout_training/providers/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,8 +14,8 @@ class HomeDrawer extends ConsumerStatefulWidget {
 class HomeDrawerState extends ConsumerState<HomeDrawer> {
   void handleLogout() {
     ref.read(formProvider).clearAccount();
-    ref.read(formProvider).updateToken(false);
-    // Navigator.of(context).pushNamed(LoginPageState.routeName);
+    ref.read(authProvider).updateToken(false);
+    Navigator.of(context).pushNamed(LoginPageState.routeName);
   }
 
   @override
